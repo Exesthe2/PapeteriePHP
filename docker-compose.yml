@@ -1,0 +1,87 @@
+version: '3'
+
+services:
+
+  # Apache PHP 8
+  apache:
+
+    # Plutôt qu'une image téléchargée depuis docker Hub, on va créer nous même une image
+    build:
+      context: .
+      # PHP 8.1
+      dockerfile: DockerContainersConfig/build/apache/php-8.1/Dockerfile
+
+    container_name: web
+
+    ports:
+      - '80:80'
+      - '9003:9003'
+
+    volumes:
+      # Le dossier Backend contiendra l'application PHP
+      - './Backend:/var/www/html'
+      - './Backend/.composer/cache:/var/www/.composer/cache'
+
+      # Le dossier log contiendra les logs du container
+      - './logs:/var/log'
+
+      # Configuration des vhosts
+      - './DockerContainersConfig/vhosts:/etc/apache2/sites-enabled'
+    environment:
+      XDEBUG_CONFIG: 'remote_host=host.docker.internal remote_port=9003'
+      PHP_IDE_CONFIG: serverName=Docker
+    depends_on:
+      - db
+    links:
+      - db
+    networks:
+      - -docker-web
+
+
+  # MariaDB
+  db:
+    image: 'mariadb:10.7'
+    container_name: db
+    ports:
+      - '3306:3306'
+    environment:
+      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_DATABASE=formation
+      - MARIADB_USER=formation
+      - MARIADB_PASSWORD=formati0N
+    #volumes:
+      #- './DATA:/var/lib/mysql'
+    networks:
+      - -docker-web
+
+
+  # PHPMyAdmin
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    ports:
+      - 8081:80
+    networks:
+      - -docker-web
+
+
+  # MailHog
+#  mailhog:
+#     image: mailhog/mailhog
+#     restart: always
+#     container_name: mailhog
+#     ports:
+#       - '1025:1025'
+#       - '8025:8025'
+#     networks:
+#       - -docker-web
+
+networks:
+  -docker-web:
+    driver: bridge

@@ -4,6 +4,9 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/Backend/TP1" isTestSource="false" packagePrefix="App" />
       <sourceFolder url="file://$MODULE_DIR$/Backend/TP1/src" isTestSource="false" packagePrefix="App" />
+      <excludeFolder url="file://$MODULE_DIR$/Backend/.composer" />
+      <excludeFolder url="file://$MODULE_DIR$/Backend/TP1/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/Backend/TP2/vendor" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

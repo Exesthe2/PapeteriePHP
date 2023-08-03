@@ -1,0 +1,4 @@
+[Thu Aug 03 10:06:52.028610 2023] [php:error] [pid 17] [client 172.22.0.1:50766] script '/var/www/html/index.php' not found or unable to stat
+[Thu Aug 03 10:06:55.572782 2023] [autoindex:error] [pid 17] [client 172.22.0.1:50766] AH01276: Cannot serve directory /var/www/html/: No matching DirectoryIndex (index.php,index.html) found, and server-generated directory index forbidden by Options directive
+[Thu Aug 03 10:22:42.204108 2023] [autoindex:error] [pid 19] [client 172.22.0.1:37340] AH01276: Cannot serve directory /var/www/html/: No matching DirectoryIndex (index.php,index.html) found, and server-generated directory index forbidden by Options directive
+[Thu Aug 03 13:39:23.580527 2023] [autoindex:error] [pid 21] [client 172.22.0.1:57804] AH01276: Cannot serve directory /var/www/html/: No matching DirectoryIndex (index.php,index.html) found, and server-generated directory index forbidden by Options directive
